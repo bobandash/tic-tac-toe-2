@@ -1,0 +1,63 @@
+html, body, header {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header * {
+    text-align: center;
+}
+
+
+/*for the tic tac toe board*/
+
+body {
+    height: 80%;
+}
+
+#container {
+    padding-top: 4em;
+    width: 50%;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+#container button {
+    width: 33.3%;
+    height: 33.3%;
+    background-color: white;
+    border: 1px solid black;
+    margin: 0;
+    font-size: 3em;
+    color: black;
+}
+
+.no-left-border {
+    border-left: none !important;
+}
+
+.no-right-border {
+    border-right: none !important;
+}
+
+.no-top-border {
+    border-top: none !important;
+}
+
+.no-bottom-border {
+    border-bottom: none !important;
+}
+
+/*end for the tic tac toe board*/
+
+
+/*display game status*/
+#game-status {
+    font-size: 3em;
+    text-align: center;
+}
+
+/*end display game status*/
