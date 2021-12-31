@@ -1,7 +1,33 @@
-html, body, header {
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+@font-face {
+    font-family: 'StreetFighter';
+    src: url('Fonts/street-fighter-font/SingleFighter-Yz3qL.otf');
+}
+
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    height: 100%;
+}
+
+/*document layout*/
+body {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 25% 50% 15% 10%;
+    grid-template-areas:
+        "player1-name header player2-name"
+        "player1-avatar board player2-avatar"
+        "player1-avatar gameStatus player2-avatar"
+        "player1-score buttons player2-score";
+}
+
+
+/*for the header*/
+header {
+    grid-area: header;
 }
 
 header * {
@@ -9,16 +35,79 @@ header * {
 }
 
 
-/*for the tic tac toe board*/
-
-body {
-    height: 80%;
+#hololive-logo {
+    height: 7em;
+    margin-bottom: -4.25em;
+    margin-top: -1.5em;
 }
 
+.game-title {
+    font-family: 'Cute Font', 'Comic Sans', 'san-serif';
+    font-size: 4em;
+    color: rgb(118, 217, 250);
+}
+
+/*end the header*/
+
+
+
+button a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/*for player displays*/
+
+#player1-name {
+    grid-area: player1-name;
+}
+
+#player2-name {
+    grid-area: player2-name;
+}
+
+#player1-name, #player2-name {
+    color: white;
+    font-size: 4em;
+    font-family: 'Cute Font', 'Comic Sans', 'san-serif';
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+
+#player1-avatar, #player2-avatar{
+    height: 80%;
+    margin: 0 auto;
+    margin-bottom: auto;
+}
+
+#player1-avatar {
+    grid-area: player1-avatar;
+}
+
+#player2-avatar {
+    grid-area: player2-avatar;
+}
+
+#player1-background{
+    grid-area: player1-name / player1-name / player1-score / player1-name;
+}
+
+#player2-background{
+    grid-area: player2-name / player2-name / player2-score / player2-name;
+}
+
+/*end player displays*/
+
+
+/*for the tic tac toe board*/
+
 #container {
-    padding-top: 4em;
-    width: 50%;
-    height: 300px;
+    grid-area: board;
+    width: 90%;
+    height: 50vh;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -27,12 +116,16 @@ body {
 
 #container button {
     width: 33.3%;
-    height: 33.3%;
+    height: 33.33333%;
     background-color: white;
     border: 1px solid black;
     margin: 0;
     font-size: 3em;
     color: black;
+}
+
+#container button img {
+    height: 100%;
 }
 
 .no-left-border {
@@ -56,8 +149,29 @@ body {
 
 /*display game status*/
 #game-status {
+    grid-area: gameStatus;
     font-size: 3em;
     text-align: center;
 }
 
 /*end display game status*/
+
+/*display button container*/
+#buttons-container {
+    grid-area: buttons;
+    display: flex;
+    justify-content: center;
+}
+
+#buttons-container button {
+    width: 20%;
+    height: 80%;
+    margin-left: 2em;
+    margin-right: 2em;
+    background-color: white;
+}
+
+#buttons-container button:hover {
+    background-color: rgb(223, 208, 208);
+}
+

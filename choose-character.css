@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+@font-face {
+    font-family: 'StreetFighter';
+    src: url('Fonts/street-fighter-font/SingleFighter-Yz3qL.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/*for the top portion up to game title*/
+
+.fighter-text {
+    font-family: 'StreetFighter', 'Comic Sans', 'san-serif';
+    font-size: 3em;
+    color: red;
+}
+
+#hololive-logo {
+    height: 5.5em;
+    margin-bottom: -2.5em;
+    margin-top: -1.5em;
+}
+
+.game-title {
+    font-family: 'Cute Font', 'Comic Sans', 'san-serif';
+    font-size: 3.5em;
+    color: rgb(118, 217, 250);
+}
+
+/*end the top portion up to game title*/
+
+#character-select-image {
+    height: 45vh;
+}
+
+#character-select-image img {
+    height: 80%;
+}
+
+#character-select-image h2 {
+    height: 12.5%;
+    font-size: 2.5em;
+    margin: 0 auto;
+}
+
+body {
+    width: 100%;
+    background-image: url('images/background-images/atlantis.jpg');
+}
+
+/*for the character selection buttons*/
+
+#character-selection {
+    display: flex;
+    justify-content: center;
+}
+
+#character-selection button{
+    margin: 0 20px 0 20px;
+    border: 1px solid black;
+}
+
+#ame-button:hover, #ame-button:focus {
+    background: yellow;
+}
+
+#calli-button:hover, #calli-button:focus {
+    background-color: pink;
+}
+
+#gura-button:hover, #gura-button:focus {
+    background-color: blue;
+}
+
+#ina-button:hover, #ina-button:focus {
+    background-color: purple;
+}
+
+#kiara-button:hover, #kiara-button:focus {
+    background-color: red;
+}
+
+#random-button:hover, #random-button:focus {
+    background-image: linear-gradient(45deg, yellow 0%, pink 16.6%, blue 33.2%, purple 50%, red 66.7%, black 83.3%);
+}
+
+#character-selection button img {
+    width: 15vh;
+    vertical-align: middle;
+}
+
+#already-chosen {
+    background-color: gray;
+}
+
+#already-chosen:hover {
+    background-color: gray;
+}
+
+/*for the character selection buttons*/
+
+
+#confirm-button {
+    margin-top: 1.5em;
+    padding: 0.5em 2em 0.5em 2em;
+    font-family: 'Cute Font', 'Comic Sans', 'san-serif';
+    font-size: 2em;
+    background-color: white;
+    border: 1px solid black;
+}
