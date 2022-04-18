@@ -1,25 +1,28 @@
 
 //for the gameboard
 //includes the moves that the players made and the display
-const Gameboard = () => {
+
+
+
+
+const Gameboard = (() => {
     //initializing the board and the round
     let round = 0;
-    let allSpaces = document.querySelectorAll('#container button');
-    let allSpacesImage = document.querySelectorAll('#container button img');
+    let allSpaces = Array.from(document.querySelectorAll('#container button'));
     const gameStatusText = document.querySelector('#game-status')
 
     const gameboardArray = new Array(9).fill('');
 
     //create a new game
     const newGame = () => {
-        changeCharacterAvatars();
-        display();
+        changeCharacterSideBanners();
+        clearBoard();
         addPlayerFunctionality();
         transitionButtonFunctionality();
         updateGameStatus();
     }
 
-    const changeCharacterAvatars = () =>
+    const changeCharacterSideBanners = () =>
     {
         const player1NameDisplay = document.querySelector('#player1-name');
         const player2NameDisplay = document.querySelector('#player2-name');
@@ -32,17 +35,6 @@ const Gameboard = () => {
         changeDisplay(player1.name, player1NameDisplay, player1AvatarDisplay, player1Background);
         changeDisplay(player2.name, player2NameDisplay, player2AvatarDisplay, player2Background);
     }
-
-    //for the next game button functionality
-    const nextGame = () =>  {
-        gameboardArray.fill('');
-        for(let i = 0; i < allSpacesImage.length; i++)
-        {
-            allSpacesImage[i].src = 'images/smol-faces/full-transparent.png';
-        }
-    }
-
-
 
     function changeDisplay (name, nameDisplayLocation, avatarDisplayLocation, playerBackground) {
         nameDisplayLocation.innerText = name;
@@ -76,23 +68,23 @@ const Gameboard = () => {
     }
 
 
-    //for displaying the board and the status of the game
-    const display = () => {
-        for(let i = 0; i < allSpaces.length; i++)
-        {
-            if(gameboardArray[i] != '')
-            {
-                allSpacesImage[i].src = gameboardArray[i];
-            }
-        }
+    //for resetting the board
+    const clearBoard = () => {
+        let allImages = document.querySelectorAll('#container button img');
+        allImages.forEach((image) => image.remove());
+        gameboardArray.fill('');
+        round = 0;
     }
 
     const addMoveToBoard = (position, mark) => {
         gameboardArray[position] = mark;
+        let currSpaceImage = document.createElement('img');
+        currSpaceImage.src =  gameboardArray[position];
+        allSpaces[position].appendChild(currSpaceImage);
         round++;
     }
 
-
+    //when click on any tiles on gameboard, changes array
     const addPlayerFunctionality = () => {
         for(let i = 0; i < allSpaces.length; i++)
         {
@@ -144,15 +136,17 @@ const Gameboard = () => {
         return false;
     }
 
-
+    // remove player functionality
     const removePlayerFunctionality = () => {
         for(let i = 0; i < allSpaces.length; i++)
         {
             //basically removes all event listeners for the buttons
             allSpaces[i].replaceWith(allSpaces[i].cloneNode(true));
-        }        
+        }
+        allSpaces = Array.from(document.querySelectorAll('#container button'));
     }
 
+    // for the bottom text to update game status
     const updateGameStatus = () => {
         if(checkWinner())
         {
@@ -168,16 +162,33 @@ const Gameboard = () => {
         }
     }
 
+    //function to call to add the next game and choose characters button functionality
+    const transitionButtonFunctionality = () => {
+        const nextGameButton = document.querySelector('#next-game-button');
+        const chooseCharactersButton = document.querySelector('#choose-characters-button');
 
-    return {newGame, gameboardArray, display, addMoveToBoard, addPlayerFunctionality, removePlayerFunctionality, checkWinner, updateGameStatus, nextGame};
-}
+        nextGameButton.addEventListener('click',function () {
+            //if the game is actually over
+            if(checkWinner() || round == 9)
+            {
+                newGame();
+            }
+        })
 
+        chooseCharactersButton.addEventListener('click', function () {
+            window.location.href = "choose-character.html";
+        })
+    }
+
+    return {allSpaces, newGame, gameboardArray, addMoveToBoard, addPlayerFunctionality, removePlayerFunctionality, checkWinner, updateGameStatus};
+})();
 
 
 
 //the player object
 const player = (name) => {
     let mark = '';
+    let score = 0;
     switch (name){
         case 'Amelia Watson':
             mark = "images/smol-faces/smol-ame.png"
@@ -206,7 +217,6 @@ const player = (name) => {
         if(actualGameboard.gameboardArray[position] == '')
         {
             actualGameboard.addMoveToBoard(position, mark);
-            actualGameboard.display();
             if(actualGameboard.checkWinner())
             {
                 gameStatusText.innerText = `${name} WINS!`;
@@ -220,26 +230,7 @@ const player = (name) => {
         }
     }
     
-    return {name, mark, makeMove};
-}
-
-
-//function to call to add the next game and choose characters button functionality
-const transitionButtonFunctionality = () => {
-    const nextGameButton = document.querySelector('#next-game-button');
-    const chooseCharactersButton = document.querySelector('#choose-characters-button');
-
-    nextGameButton.addEventListener('click',function () {
-        //if the game is actually over
-        if(actualGameboard.checkWinner())
-        {
-            actualGameboard.nextGame();
-        }
-    })
-
-    chooseCharactersButton.addEventListener('click', function () {
-        window.location.href = "choose-character.html";
-    })
+    return {name, mark, score, makeMove};
 }
 
 
@@ -247,5 +238,5 @@ const transitionButtonFunctionality = () => {
 
 const player1 = player(window.localStorage.getItem("player1Name"));
 const player2 = player(window.localStorage.getItem("player2Name"));
-const actualGameboard =  Gameboard();
+const actualGameboard =  Gameboard;
 actualGameboard.newGame();
