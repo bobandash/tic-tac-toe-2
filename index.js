@@ -3,8 +3,6 @@
 //includes the moves that the players made and the display
 
 
-
-
 const Gameboard = (() => {
     //initializing the board and the round
     let round = 0;
@@ -150,7 +148,16 @@ const Gameboard = (() => {
     const updateGameStatus = () => {
         if(checkWinner())
         {
-            if(round % 2 == 0 ? gameStatusText.innerText = `${player2.name} WINS` : gameStatusText.innerText = `${player1.name} WINS`);
+            if(round % 2 == 0) {
+                gameStatusText.innerText = `${player2.name} WINS`;
+                player2.score = player2.score + 1;
+            }
+            else
+            {
+                gameStatusText.innerText = `${player1.name} WINS`;
+                player1.score = player1.score + 1;
+            }
+            updateScore();
         }
         else if (round == 9)
         {
@@ -159,6 +166,20 @@ const Gameboard = (() => {
         else
         {
             if(round % 2 == 0 ? gameStatusText.innerText = `${player1.name}'s Turn` : gameStatusText.innerText = `${player2.name}'s Turn`);
+        }
+    }
+
+    //to update the score
+    const updateScore = () => {
+        let player1score = document.getElementById('player1-score');
+        let player2score = document.getElementById('player2-score');
+        if(round % 2 == 0)
+        {
+            player2score.innerText = player2.score;
+        }
+        else
+        {
+            player1score.innerText = player1.score;
         }
     }
 
@@ -180,7 +201,7 @@ const Gameboard = (() => {
         })
     }
 
-    return {allSpaces, newGame, gameboardArray, addMoveToBoard, addPlayerFunctionality, removePlayerFunctionality, checkWinner, updateGameStatus};
+    return {newGame, gameboardArray, addMoveToBoard, addPlayerFunctionality, removePlayerFunctionality, checkWinner, updateGameStatus};
 })();
 
 

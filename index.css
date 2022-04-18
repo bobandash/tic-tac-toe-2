@@ -76,6 +76,20 @@ button a {
     margin-bottom: 0;
 }
 
+#player1-score {
+    grid-area: player1-score;
+}
+
+#player2-score {
+    grid-area: player2-score;
+}
+
+#player1-score, #player2-score {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+}
+
 
 #player1-avatar, #player2-avatar{
     height: 80%;
